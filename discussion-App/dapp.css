@@ -1,0 +1,149 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+     font-family: "Montserrat", sans-serif;
+
+}
+body{
+   background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+  min-height: 100vh;
+  padding: 30px;
+}
+
+
+#firstHead{
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4338ca;
+    margin-bottom:30px ;
+    font-weight: 700;
+} 
+
+.container{
+    display:flex;
+    height:90vh;
+    gap: 25px;
+}
+
+
+.twoBox{
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0,0.8);
+    padding: 20px;
+}
+
+#leftcontainer{
+    width: 35%;
+    display: flex;
+   flex-direction: column;
+}
+
+#rightContainer{
+    width: 65%;
+}
+
+button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+#favbtn{
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  
+}
+
+button:hover {
+  background: #3730a3;
+  transform: translateY(-2px);
+}
+#questionSearch{
+   width: 100%;
+   margin-top: 15px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 13px;
+  margin: 12px 0;
+  border: 1px solid #678fcb;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+textarea {
+  resize: none;
+  min-height: 140px;
+}
+#dataList {
+  margin-top: 20px;
+  overflow-y: auto;
+  flex: 1;
+
+}
+#dataList div {
+  background: #f8faff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+
+#dataList div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+}
+#respondQue {
+  margin-top: 10px;
+}
+#respondQue h3 {
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+#respondQue p {
+  color: #444;
+  line-height: 1.6;
+}
+#resolveHolder {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+#responseAns div {
+  background: #E7E7E7;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 12px;
+
+}
+#responseAns h4 {
+  color: #4338ca;
+  margin-bottom: 6px;
+}
+#commentHolder {
+  margin-top: 20px;
+}
+
+
+
+
+
+
