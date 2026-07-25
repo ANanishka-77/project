@@ -123,7 +123,7 @@ function addQuestionToPanel(question)
    questionContainer.setAttribute("id",question.title)
    questionContainer.style.background="#E7E7E7";
    questionContainer.style.margin = "10px";
-   questionContainer.style.padding = "20px";
+   questionContainer.style.padding = "18px";
    questionContainer.style.cursor = "pointer";
    questionContainer.style.borderRadius="25px";
 
