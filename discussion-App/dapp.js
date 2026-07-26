@@ -17,7 +17,7 @@ var downvote=document.getElementById("downvote")
 var newQuestionFormButton = document.getElementById("newQuestionForm");
 questionSearchNode.addEventListener("keyup",function(event)
 {
-   //show filtered result
+   
     filterResult(event.target.value)
 });
 
@@ -82,9 +82,6 @@ submitQuestionNode.addEventListener("click",onQuestionSubmit)
 function onQuestionSubmit()
 {
    var question={
-//   Yaha ek object ban raha hai.
-// Object matlab related information ko ek jagah rakhna.
-// Jaise student ek object h or uska information jaise name age class address.
       title:questionTitleNode.value,
       description:questionDescriptionNode.value,
       responses:[],
@@ -93,9 +90,9 @@ function onQuestionSubmit()
       createdAt:Date.now(),
       isFav:false
    }
-   saveQuestion(question);//Ab question ko Local Storage me save karna hai. Question object function ke andar bhej diya.
+   saveQuestion(question);
    addQuestionToPanel(question);
-   clearQuestionForm();//submit ke baad textbox empty krdo
+   clearQuestionForm();
 }
 function saveQuestion(question)
 {
@@ -185,7 +182,7 @@ function toggleFavQuestion(question)
 {
   return function(event)
   {
-    event.stopPropagation();//stop parents listener
+    event.stopPropagation();
     question.isFav=!question.isFav;
     updateQuestion(question);
 
