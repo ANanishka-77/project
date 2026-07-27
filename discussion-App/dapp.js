@@ -15,8 +15,8 @@ var questionSearchNode=document.getElementById("questionSearch");
 var upvote=document.getElementById("upvote")
 var downvote=document.getElementById("downvote")
 var newQuestionFormButton = document.getElementById("newQuestionForm");
-
-
+ 
+ 
 questionSearchNode.addEventListener("keyup",function(event)
 {
     filterResult(event.target.value)
@@ -25,7 +25,7 @@ function filterResult(query)
 {
   var allQuestions=getAllQuestions();
      clearQuestionPanel();  
-
+ 
   if(query)
   {
   var filteredQuestions=allQuestions.filter(function(question)
@@ -53,7 +53,7 @@ else{
   }
  
 }
-
+ 
 function  clearQuestionPanel()
 {
   allQuestionListNode.innerHTML=""
@@ -73,7 +73,7 @@ function onLoad()
 {
   addQuestionToPanel(question)
 })
-
+ 
 }
 onLoad();
 newQuestionFormButton.addEventListener("click",openNewQuestionForm) 
@@ -115,37 +115,38 @@ function addQuestionToPanel(question)
 {
    var questionContainer=document.createElement("div");
    questionContainer.setAttribute("id",question.createdAt)
-    questionContainer.style.borderRadius="25px";
-
-var creationDateandTimeNode=document.createElement("p")
-creationDateandTimeNode.innerHTML=new Date(question.createdAt).toLocaleString();
-questionContainer.appendChild(creationDateandTimeNode);
-
-
- var newQuestionTitleNode=document.createElement("p");
- newQuestionTitleNode.innerHTML=question.title;
-questionContainer.appendChild(newQuestionTitleNode);
-
- var newQuestionDescriptionNode=document.createElement("p");
- newQuestionDescriptionNode.innerHTML=question.description;
- questionContainer.appendChild(newQuestionDescriptionNode);
-
-
+   questionContainer.style.borderRadius="25px";
+ 
+   var creationDateandTimeNode=document.createElement("p")
+   creationDateandTimeNode.innerHTML=new Date(question.createdAt).toLocaleString();
+   questionContainer.appendChild(creationDateandTimeNode);
+ 
+ 
+   var newQuestionTitleNode=document.createElement("p");
+   newQuestionTitleNode.innerHTML=question.title;
+   questionContainer.appendChild(newQuestionTitleNode);
+ 
+   var newQuestionDescriptionNode=document.createElement("p");
+   newQuestionDescriptionNode.innerHTML=question.description;
+   questionContainer.appendChild(newQuestionDescriptionNode);
+ 
+ 
  var downvoteTextNode=document.createElement("p")
 downvoteTextNode.innerHTML="downvotes: "+question.downvotes
-
+ 
 questionContainer.appendChild(downvoteTextNode);
-
- var upvoteTextNode=document.createElement("p")
+ 
+var upvoteTextNode=document.createElement("p")
 upvoteTextNode.innerHTML="upvotes: "+ question.upvotes
 questionContainer.appendChild(upvoteTextNode)
-
-
-
+ 
+ 
+ 
 var addToFavNode=document.createElement("button")
+
 addToFavNode.id="favbtn";
 addToFavNode.style.margin="10px";
-
+ 
  if(question.isFav)
     {
       addToFavNode.innerHTML="remove fav"
@@ -157,25 +158,25 @@ addToFavNode.style.margin="10px";
    
 questionContainer.appendChild(addToFavNode);
 addToFavNode.addEventListener("click",toggleFavQuestion(question));
- allQuestionListNode.appendChild(questionContainer)
-
-
+allQuestionListNode.appendChild(questionContainer)
+ 
+ 
 var createAtNode=document.createElement("p");
 createAtNode.innerHTML="created: "+updateAndConvertTime(createAtNode)(question.createdAt)+" ago";
 questionContainer.appendChild(createAtNode);
-
-
-
- questionContainer.addEventListener("click",onQuestionClick(question));
+ 
+ 
+ 
+questionContainer.addEventListener("click",onQuestionClick(question));
 }
 function toggleFavQuestion(question)
 {
   return function(event)
   {
-    event.stopPropagation();//stop parents listener
+    event.stopPropagation();
     question.isFav=!question.isFav;
     updateQuestion(question);
-
+ 
     if(question.isFav)
     {
       event.target.innerHTML="remove fav"
@@ -189,7 +190,7 @@ function onQuestionClick(question)
 {
   return function()
   {
-
+ 
     selectedQuestion = question; 
     hideQuestionPanel();
     clearDetails();
@@ -240,7 +241,7 @@ function onResponseSubmit(question)
   saveResponse(question,response);
   question.responses.push(response);
   addResponseInPanel(response);
-
+ 
   commentatorNameNode.value="";
   commentNameNode.value="";
  }
@@ -249,17 +250,17 @@ function addResponseInPanel(response)
 {
    var userNameNode=document.createElement("h4")
    userNameNode.innerHTML=response.name;
-
+ 
    var commentNode=document.createElement("p")
    commentNode.innerHTML=response.description;
-
+ 
    var container=document.createElement("div");
-
+ 
    container.appendChild(userNameNode);
    container.appendChild(commentNode);
    responseContainerNode.appendChild(container);
 }
-
+ 
 function showDetails()
 {
   questionDetailContainerNode.style.display="block"
@@ -272,10 +273,10 @@ function addQuestionToRight(question)
   questionDetailContainerNode.innerHTML="";
   var titleNode=document.createElement("h3");
   titleNode.innerHTML=question.title;
-
+ 
   var descriptionNode=document.createElement("p")
   descriptionNode.innerHTML=question.description;
-
+ 
   questionDetailContainerNode.appendChild(titleNode)
   questionDetailContainerNode.appendChild(descriptionNode)
 }
@@ -306,7 +307,7 @@ function saveResponse(updatedquestion,response)
     return question;
   });
  localStorage.setItem("questions",JSON.stringify(reviseQuestions))
-
+ 
 }
 function clearDetails()
 {
@@ -328,15 +329,15 @@ resolveQuestionNode.addEventListener("click", function () {
   {
     return;
   }
-
+ 
   var allQuestions = getAllQuestions();
-
+ 
   var filtered = allQuestions.filter(function (q) {
     return q.createdAt !== selectedQuestion.createdAt;
   });
-
+ 
   localStorage.setItem("questions", JSON.stringify(filtered));
-
+ 
   location.reload();
 });
 function updateAndConvertTime(element)
@@ -349,13 +350,12 @@ function updateAndConvertTime(element)
 },1000);
 return convertDateToCreatedAtTime(time)
  }  
-
+ 
 }
 function convertDateToCreatedAtTime(date)
 {
-   var currentTime=Date.now();
+  var currentTime=Date.now();
   var timeLapsed=currentTime-new Date(date).getTime();
-
   var secondsDiff=parseInt(timeLapsed/1000);
   var minutesDiff=parseInt(secondsDiff/60);
   var hourDiff=parseInt(minutesDiff/60);
@@ -365,15 +365,15 @@ function clearQuestionForm() {
   questionTitleNode.value = "";
   questionDescriptionNode.value = "";
 }
-
+ 
 function hideQuestionDetails() {
     questionDetailContainerNode.style.display = "none";
     resolveQuestionContainerNode.style.display = "none";
     responseContainerNode.style.display = "none";
     commentContainerNode.style.display = "none";
 }
-
-
+ 
+ 
 function clearCommentPanel() {
     commentatorNameNode.value = "";
     commentNameNode.value = "";
@@ -383,11 +383,11 @@ function showQuestionForm() {
 }
 function openNewQuestionForm()
 {
-
+ 
    hideQuestionPanel();
 clearCommentPanel();
 hideQuestionDetails();
 showQuestionForm();
-
+ 
     resolveQuestionContainerNode.style.display = "none";
 }
