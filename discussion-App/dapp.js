@@ -59,7 +59,7 @@ function  clearQuestionPanel()
 }
 function onLoad()
 {
-  //get all questions from storage
+
   var allQuestions=getAllQuestions();
   allQuestions.sort(function(CurrentQ,nextQ)
 {
@@ -69,7 +69,7 @@ function onLoad()
    }
     return 1;
   })
-  allQuestions.forEach(function(question)//jo bhi storage m hoga wo ek ek krke left panel m show honge
+  allQuestions.forEach(function(question)
 {
   addQuestionToPanel(question)
 })
@@ -297,8 +297,8 @@ function hideQuestionPanel()
 function updateQuestion(updatedQuestion)
 {
   var allQuestions=getAllQuestions();
-   var reviseQuestions=allQuestions.map(function(question){//array ke har object par loop chalega
-    if(updatedQuestion.title===question.title)//check karega konsa question update krna h
+   var reviseQuestions=allQuestions.map(function(question){
+    if(updatedQuestion.title===question.title)
     {
       return updatedQuestion
     }
