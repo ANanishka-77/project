@@ -15,12 +15,12 @@ var questionSearchNode=document.getElementById("questionSearch");
 var upvote=document.getElementById("upvote")
 var downvote=document.getElementById("downvote")
 var newQuestionFormButton = document.getElementById("newQuestionForm");
+
+
 questionSearchNode.addEventListener("keyup",function(event)
 {
-   
     filterResult(event.target.value)
 });
-
 function filterResult(query)
 {
   var allQuestions=getAllQuestions();
@@ -53,13 +53,13 @@ else{
   }
  
 }
+
 function  clearQuestionPanel()
 {
   allQuestionListNode.innerHTML=""
 }
 function onLoad()
 {
-
   var allQuestions=getAllQuestions();
   allQuestions.sort(function(CurrentQ,nextQ)
 {
@@ -78,7 +78,6 @@ function onLoad()
 onLoad();
 newQuestionFormButton.addEventListener("click",openNewQuestionForm) 
 submitQuestionNode.addEventListener("click",onQuestionSubmit)
-
 function onQuestionSubmit()
 {
    var question={
@@ -99,7 +98,6 @@ function saveQuestion(question)
     var allQuestions=getAllQuestions(); 
     allQuestions.push(question);
     localStorage.setItem("questions",JSON.stringify(allQuestions))
-    
 }
 function getAllQuestions()
 {
@@ -115,26 +113,17 @@ function getAllQuestions()
   }
 function addQuestionToPanel(question)
 {
-  
    var questionContainer=document.createElement("div");
-   questionContainer.setAttribute("id",question.title)
-   questionContainer.style.background="#E7E7E7";
-   questionContainer.style.margin = "10px";
-   questionContainer.style.padding = "18px";
-   questionContainer.style.cursor = "pointer";
-   questionContainer.style.borderRadius="25px";
+   questionContainer.setAttribute("id",question.createdAt)
+    questionContainer.style.borderRadius="25px";
 
 var creationDateandTimeNode=document.createElement("p")
 creationDateandTimeNode.innerHTML=new Date(question.createdAt).toLocaleString();
-creationDateandTimeNode.style.float="right";
-creationDateandTimeNode.style.fontSize="15px";
 questionContainer.appendChild(creationDateandTimeNode);
 
 
  var newQuestionTitleNode=document.createElement("p");
  newQuestionTitleNode.innerHTML=question.title;
- newQuestionTitleNode.style.fontSize="20px";
- newQuestionTitleNode.style.fontWeight="500"
 questionContainer.appendChild(newQuestionTitleNode);
 
  var newQuestionDescriptionNode=document.createElement("p");
@@ -143,14 +132,15 @@ questionContainer.appendChild(newQuestionTitleNode);
 
 
  var downvoteTextNode=document.createElement("p")
-downvoteTextNode.innerHTML="downvotes "+question.downvotes
-downvoteTextNode.style.float="right";
+downvoteTextNode.innerHTML="downvotes: "+question.downvotes
+
 questionContainer.appendChild(downvoteTextNode);
 
  var upvoteTextNode=document.createElement("p")
-upvoteTextNode.innerHTML="upvote ="+question.upvotes
-upvoteTextNode.style.float="right";
+upvoteTextNode.innerHTML="upvotes: "+ question.upvotes
 questionContainer.appendChild(upvoteTextNode)
+
+
 
 var addToFavNode=document.createElement("button")
 addToFavNode.id="favbtn";
@@ -164,14 +154,14 @@ addToFavNode.style.margin="10px";
     {
      addToFavNode.innerHTML="add fav"
     }
+   
 questionContainer.appendChild(addToFavNode);
 addToFavNode.addEventListener("click",toggleFavQuestion(question));
  allQuestionListNode.appendChild(questionContainer)
 
+
 var createAtNode=document.createElement("p");
 createAtNode.innerHTML="created: "+updateAndConvertTime(createAtNode)(question.createdAt)+" ago";
-createAtNode.style.float="right"
-createAtNode.style.fontSize="13px";
 questionContainer.appendChild(createAtNode);
 
 
@@ -182,7 +172,7 @@ function toggleFavQuestion(question)
 {
   return function(event)
   {
-    event.stopPropagation();
+    event.stopPropagation();//stop parents listener
     question.isFav=!question.isFav;
     updateQuestion(question);
 
@@ -215,7 +205,6 @@ function onQuestionClick(question)
     downvote.onclick=downvoteQuestion(question)
   }
 }
-
 function upvoteQuestion(question)
 {
    return function()
@@ -236,9 +225,9 @@ function downvoteQuestion(question)
 }
 function updateQuestionUI(question)
 {
-  var questionContainerNode=document.getElementById(question.title)
-  questionContainerNode.childNodes[2].innerHTML="upvote = "+question.upvotes;
-  questionContainerNode.childNodes[3].innerHTML="downvote = "+question.downvotes;
+  var questionContainerNode=document.getElementById(question.createdAt)
+  questionContainerNode.childNodes[3].innerHTML="downvotes: "+question.downvotes;
+  questionContainerNode.childNodes[4].innerHTML="upvotes: "+question.upvotes;
 }
 function onResponseSubmit(question)
 {
@@ -298,7 +287,7 @@ function updateQuestion(updatedQuestion)
 {
   var allQuestions=getAllQuestions();
    var reviseQuestions=allQuestions.map(function(question){
-    if(updatedQuestion.title===question.title)
+    if(updatedQuestion.createdAt===question.createdAt)
     {
       return updatedQuestion
     }
@@ -310,7 +299,8 @@ function saveResponse(updatedquestion,response)
 {
   var allQuestions=getAllQuestions();
   var reviseQuestions=allQuestions.map(function(question){
-    if(updatedquestion.title===question.title){
+    if(updatedquestion.createdAt===question.createdAt)
+    {
       question.responses.push(response)
     }
     return question;
@@ -332,13 +322,17 @@ function printNoMatchFound()
   title.innerHTML="no match found"
   allQuestionListNode.appendChild(title)
 }
-
 var selectedQuestion=null;
 resolveQuestionNode.addEventListener("click", function () {
+  if(!selectedQuestion)
+  {
+    return;
+  }
+
   var allQuestions = getAllQuestions();
 
   var filtered = allQuestions.filter(function (q) {
-    return q.title !== selectedQuestion.title;
+    return q.createdAt !== selectedQuestion.createdAt;
   });
 
   localStorage.setItem("questions", JSON.stringify(filtered));
@@ -357,8 +351,6 @@ return convertDateToCreatedAtTime(time)
  }  
 
 }
-
-
 function convertDateToCreatedAtTime(date)
 {
    var currentTime=Date.now();
@@ -369,7 +361,6 @@ function convertDateToCreatedAtTime(date)
   var hourDiff=parseInt(minutesDiff/60);
   return hourDiff+" hours "+minutesDiff+" minutes "+ secondsDiff+" Seconds ";
 }
-// Clear form
 function clearQuestionForm() {
   questionTitleNode.value = "";
   questionDescriptionNode.value = "";

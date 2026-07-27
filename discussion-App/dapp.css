@@ -6,22 +6,20 @@
 }
 
 body {
-  background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+   background: linear-gradient(135deg, #eef2ff, #f8f9ff);
   min-height: 100vh;
   padding: 30px;
 }
 
-/* Heading */
 
 #firstHead {
   text-align: center;
   font-size: 2.5rem;
   color: #4338ca;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-weight: 700;
 }
 
-/* Main Layout */
 
 .container {
   display: flex;
@@ -30,13 +28,12 @@ body {
 }
 
 .twoBox {
-  background: white;
+  background: whitesmoke;
   border-radius: 18px;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-  padding: 20px;
+  box-shadow: 0 12px 35px rgba(58, 45, 198, 0.50);
+  padding: 24px;
 }
 
-/* Left */
 
 #leftcontainer {
   width: 35%;
@@ -48,7 +45,6 @@ body {
   width: 65%;
 }
 
-/* Buttons */
 
 button {
   background: #4f46e5;
@@ -67,24 +63,23 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Search */
 
 #questionSearch {
   width: 100%;
   margin-top: 15px;
 }
 
-/* Inputs */
 
 input,
 textarea {
   width: 100%;
   padding: 13px;
   margin: 12px 0;
-  border: 1px solid #d1d5db;
   border-radius: 10px;
+  border: 1px solid #d1d5db;
   font-size: 15px;
   transition: .3s;
+  
 }
 
 input:focus,
@@ -99,7 +94,6 @@ textarea {
   min-height: 140px;
 }
 
-/* Question List */
 
 #dataList {
   margin-top: 20px;
@@ -108,10 +102,11 @@ textarea {
 }
 
 #dataList div {
+  position: relative;
   background: #f8faff;
   border-left: 5px solid #4f46e5;
   border-radius: 12px;
-  padding: 15px;
+  padding: 18px;
   margin-bottom: 15px;
   cursor: pointer;
   transition: .3s;
@@ -119,18 +114,101 @@ textarea {
 
 #dataList div:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    box-shadow: 0 12px 35px rgba(58, 45, 198, 0.50);
+
 }
 
-#dataList p:first-child {
+#dataList div p:nth-of-type(1) {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #828791;
+}
+
+#dataList div p:nth-of-type(2) {
   font-weight: 700;
+  font-size: 20px;
   color: #111827;
+  line-height: 1.3;
+  padding-right: 110px;
+  margin-bottom: 6px;
 }
 
-/* Right */
+#dataList div p:nth-of-type(3) {
+  color: #6b7280;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+#dataList div p:nth-of-type(4),
+#dataList div p:nth-of-type(5) {
+
+  display: inline-flex;
+  align-items: center;
+  float:right;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-right: 8px;
+}
+
+#dataList div p:nth-of-type(4),
+#dataList div p:nth-of-type(5){
+  color: #3226dc;
+  background: rgba(53, 38, 220, 0.1);
+}
+
+ 
+
+
+#dataList div p:nth-of-type(6) {
+  display: block;
+  font-size: 13px;
+  color: #828791;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #63676e;
+}
+
+
+#dataList div button {
+  display: block;
+  margin-top: 10px;
+  background: white;
+  color: #4f46e5;
+  border: 1px solid #678dc7;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#dataList div button:hover {
+  background: rgba(79, 70, 229, 0.08);
+  transform: none;
+}
+
+
 
 #respondQue {
   margin-top: 10px;
+  animation: fadeIn .25s ease;
+}
+
+/* Small breadcrumb label above the question title — pure CSS, no markup change */
+#respondQue h3::before {
+  content: "Question";
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 4px;
 }
 
 #respondQue h3 {
@@ -143,7 +221,11 @@ textarea {
   line-height: 1.6;
 }
 
-/* Resolve Buttons */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 
 #resolveHolder {
   margin: 20px 0;
@@ -152,7 +234,32 @@ textarea {
   flex-wrap: wrap;
 }
 
-/* Responses */
+#upvote {
+  background: #4F46E5;
+}
+
+#upvote:hover {
+  background: #047857;
+}
+
+#downvote {
+  background: #4F46E5;
+}
+
+#downvote:hover {
+  background: #b91c1c;
+}
+
+#resolveQuestion {
+  margin-left: auto;
+  background: #4F46E5;
+}
+
+#resolveQuestion:hover {
+  background: #464954;
+}
+
+
 
 #responseAns div {
   background: #f9fafb;
@@ -167,13 +274,13 @@ textarea {
   margin-bottom: 6px;
 }
 
-/* Comment Box */
+
 
 #commentHolder {
   margin-top: 20px;
 }
 
-/* Scrollbar */
+
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -184,7 +291,7 @@ textarea {
   border-radius: 10px;
 }
 
-/* Mobile */
+
 
 @media(max-width:900px){
 
@@ -198,18 +305,4 @@ textarea {
     width:100%;
 }
 
-}
-.question-card {
-    background: #f8faff;
-    border-left: 5px solid #4f46e5;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.question-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,.1);
 }
