@@ -80,6 +80,15 @@ newQuestionFormButton.addEventListener("click",openNewQuestionForm)
 submitQuestionNode.addEventListener("click",onQuestionSubmit)
 function onQuestionSubmit()
 {
+
+   if (
+      questionTitleNode.value.trim() === "" ||
+      questionDescriptionNode.value.trim() === ""
+   ) {
+      alert("Please fill all fields");
+      return;
+   }
+
    var question={
       title:questionTitleNode.value,
       description:questionDescriptionNode.value,
